@@ -16,29 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import styled, { CreateStyled } from '@emotion/styled';
 
-const defaultTheme = {
-  borderRadius: '4px',
-  colors: {
-    primary: {
-      base: '#20A7C9',
-    },
-    secondary: {
-      base: '#444E7C',
-      dark1: '#363E63',
-      dark2: '#282E4A',
-      dark3: '#1B1F31',
-      light1: '#8E94B0',
-      light2: '#B4B8CA',
-      light3: '#D9DBE4',
-      light4: '#ECEEF2',
-      light5: '#F5F5F8',
-    },
-  },
-  gridUnit: '4px',
+// These are control configurations that are shared ONLY within the BigNumber viz plugin repo.
+import { t } from '@superset-ui/translation';
+
+export const foo = {
+  name: 'foo_control',
+  config: {},
 };
-
-export default styled as CreateStyled<typeof defaultTheme>;
-
-export const supersetTheme = defaultTheme;
