@@ -16,7 +16,6 @@
 # under the License.
 """Defines the templating context for SQL Lab"""
 import inspect
-import json
 import re
 from typing import Any, List, Optional, Tuple
 
@@ -49,7 +48,9 @@ def filter_values(column: str, default: Optional[str] = None) -> List[str]:
     :return: returns a list of filter values
     """
 
-    form_data = json.loads(request.form.get("form_data", "{}"))
+    from superset.views.utils import get_form_data
+
+    form_data, _ = get_form_data()
     convert_legacy_filters_into_adhoc(form_data)
     merge_extra_filters(form_data)
 
@@ -148,39 +149,6 @@ class ExtraCache:
     ) -> Optional[Any]:
         """
         Read a url or post parameter and use it in your SQL Lab query.
-
-        When in SQL Lab, it's possible to add arbitrary URL "query string" parameters,
-        and use those in your SQL code. For instance you can alter your url and add
-        `?foo=bar`, as in `{domain}/superset/sqllab?foo=bar`. Then if your query is
-        something like SELECT * FROM foo = '{{ url_param('foo') }}', it will be parsed
-        at runtime and replaced by the value in the URL.
-
-        As you create a visualization form this SQL Lab query, you can pass parameters
-        in the explore view as well as from the dashboard, and it should carry through
-        to your queries.
-
-        Default values for URL parameters can be defined in chart metadata by adding the
-        key-value pair `url_params: {'foo': 'bar'}`
-
-        :param param: the parameter to lookup
-        :param default: the value to return in the absence of the parameter
-        :param add_to_cache_keys: Whether the value should be included in the cache key
-        :returns: The URL parameters
-        """
-
-        if request.args.get(param):
-            return request.args.get(param, default)
-        # Supporting POST as well as get
-        form_data = request.form.get("form_data")
-        if isinstance(form_data, str):
-            form_data = json.loads(form_data)
-            url_params = form_data.get("url_params") or {}
-            result = url_params.get(param, default)
-            if add_to_cache_keys:
-                self.cache_key_wrapper(result)
-            return result
-        return default
-
 
 class BaseTemplateProcessor:  # pylint: disable=too-few-public-methods
     """Base class for database-specific jinja context
