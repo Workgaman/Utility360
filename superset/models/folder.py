@@ -56,7 +56,6 @@ class Folder(  # pylint: disable=too-many-instance-attributes
     id = Column(Integer, primary_key=True)
     folder_name = Column(String(500))
     description = Column(Text)
-    slug = Column(String(255), unique=True)
     parent_id = Column(Integer, ForeignKey(id))
     dashboards = relationship(
         "Dashboard", secondary=folder_dashboards, backref="folders"

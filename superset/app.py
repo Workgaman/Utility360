@@ -159,6 +159,8 @@ class SupersetAppInitializer:
             Dashboard,
             DashboardModelViewAsync,
         )
+        #folderAPI import
+        from superset.folders.api import FolderRestApi
         from superset.views.database.api import DatabaseRestApi
         from superset.views.database.views import DatabaseView, CsvToDatabaseView
         from superset.views.datasource import Datasource
@@ -186,6 +188,8 @@ class SupersetAppInitializer:
         appbuilder.add_api(DatabaseRestApi)
         appbuilder.add_api(DatasetRestApi)
         appbuilder.add_api(QueryRestApi)
+        #folderAPI add
+        appbuilder.add_api(FolderRestApi)
         #
         # Setup regular views
         #
