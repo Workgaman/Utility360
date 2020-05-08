@@ -1,4 +1,6 @@
+import json
 import logging
+from typing import Dict, Any
 
 from flask_appbuilder import Model
 from sqlalchemy import (
@@ -68,16 +70,26 @@ class Folder(  # pylint: disable=too-many-instance-attributes
         backref=backref("parent", remote_side=[id]),
         lazy="dynamic",
     )
-
-    def __init__(self, folder_name, parent=None):
-        self.folder_name = folder_name
-        self.parent = parent
+    
 
     def __repr__(self):
         return self.folder_name or str(self.id)
 
     def add_subfolder(self, folder_name):
         return Folder(folder_name=folder_name, parent=self)
+
+    def list_child_folders(self):
+        f = {"folder_name": self.folder_name, "id": self.id}
+        if self.children:
+            child_arr = []
+            for i in self.children:
+                x = i.list_child_folders()
+                child_arr.append(x)
+            if child_arr:
+                f["children"] = child_arr
+            return f
+        else:
+            return f
 
     def list_folder(self, folder):
         f = {"folder_name": folder.folder_name, "id": folder.id}
@@ -91,3 +103,28 @@ class Folder(  # pylint: disable=too-many-instance-attributes
             return f
         else:
             return f
+
+    @property
+    def changed_by_name(self):
+        if not self.changed_by:
+            return ""
+        return str(self.changed_by)
+
+    @property
+    def changed_by_url(self):
+        if not self.changed_by:
+            return ""
+        return f"/superset/profile/{self.changed_by.username}"
+
+    @property
+    def data(self) -> Dict[str, Any]:
+        children = self.list_child_folders()
+        return {
+            "id": self.id,
+            "folder_name": self.folder_name,
+            "description": self.description,
+            "dashboards": [dashboard.data for dashboard in self.dashboards],
+            "slices": [slc.data for slc in self.slices],
+            "children": children,
+        }
+

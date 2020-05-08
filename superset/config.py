@@ -153,7 +153,7 @@ SQLALCHEMY_CUSTOM_PASSWORD_STORE = None
 QUERY_SEARCH_LIMIT = 1000
 
 # Flask-WTF flag for CSRF
-WTF_CSRF_ENABLED = True
+WTF_CSRF_ENABLED = False
 
 # Add endpoints that need to be exempt from CSRF protection
 WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log"]
@@ -610,6 +610,11 @@ ROBOT_PERMISSION_ROLES = ["Public", "Gamma", "Alpha", "Admin", "sql_lab"]
 
 CONFIG_PATH_ENV_VAR = "SUPERSET_CONFIG_PATH"
 
+def flask_app_mutator(app):
+    from superset import appbuilder
+    from superset.folders.api import FolderRestApi
+    appbuilder.add_api(FolderRestApi)
+
 # If a callable is specified, it will be called at app startup while passing
 # a reference to the Flask app. This can be used to alter the Flask app
 # in whatever way.
@@ -732,7 +737,7 @@ EMAIL_REPORT_BCC_ADDRESS = None
 # slices.
 # TODO: In the future, login as the owner of the item to generate reports
 EMAIL_REPORTS_USER = "admin"
-EMAIL_REPORTS_SUBJECT_PREFIX = "[Report] "
+EMAIL_REPORTS_SUBJECT_PREFIX = "[Report]"
 
 # The webdriver to use for generating reports. Use one of the following
 # firefox

@@ -3,7 +3,7 @@ from marshmallow.validate import Length
 
 
 class FolderPostSchema(Schema):
-    folder_name = fields.String(allow_none=False, validate=Length(0, 500))
+    folder_name = fields.String(allow_none=True, validate=Length(0, 500))
     description = fields.String(allow_none=True)
     parent_id = fields.Integer(allow_none=True)
     owners = fields.List(fields.Integer(allow_none=True))

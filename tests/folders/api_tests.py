@@ -1,11 +1,11 @@
 from tests.base_api_tests import ApiOwnersTestCaseMixin
 from tests.base_tests import SupersetTestCase
 
-class DashboardApiTests(SupersetTestCase, ApiOwnersTestCaseMixin):
+class FolderApiTests(SupersetTestCase, ApiOwnersTestCaseMixin):
     resource_name = "folder"
 
     def __init__(self, *args, **kwargs):
-        super(DashboardApiTests, self).__init__(*args, **kwargs)
+        super(FolderApiTests, self).__init__(*args, **kwargs)
 
 
     def test_info_dashboard(self):
