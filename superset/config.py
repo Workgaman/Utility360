@@ -290,9 +290,9 @@ DEFAULT_FEATURE_FLAGS = {
     "REDUCE_DASHBOARD_BOOTSTRAP_PAYLOAD": True,
     "SHARE_QUERIES_VIA_KV_STORE": False,
     "SIP_38_VIZ_REARCHITECTURE": False,
-    "TAGGING_SYSTEM": False,
+    "TAGGING_SYSTEM": True,
     "SQLLAB_BACKEND_PERSISTENCE": False,
-    "LIST_VIEWS_NEW_UI": False,
+    "LIST_VIEWS_NEW_UI": True,
 }
 
 # This is merely a default.
@@ -767,7 +767,7 @@ DOCUMENTATION_ICON = None  # Recommended size: 16x16
 
 # Enables the replacement react views for all the FAB views: list, edit, show.
 # This is a work in progress so not all features available in FAB have been implemented
-ENABLE_REACT_CRUD_VIEWS = False
+ENABLE_REACT_CRUD_VIEWS = True
 
 # What is the Last N days relative in the time selector to:
 # 'today' means it is midnight (00:00:00) in the local timezone
