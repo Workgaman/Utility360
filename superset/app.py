@@ -233,7 +233,7 @@ class SupersetAppInitializer:
         appbuilder.add_view(
             SliceModelView,
             "Charts",
-            label=__("Charts"),
+            label=__("Analysis"),
             icon="fa-bar-chart",
             category="",
             category_icon="",

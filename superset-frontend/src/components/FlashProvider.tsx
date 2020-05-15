@@ -16,24 +16,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { t } from '@superset-ui/translation';
-import { ChartMetadata, ChartPlugin } from '@superset-ui/chart';
-import transformProps from './transformProps';
-import thumbnail from './images/thumbnail.png';
+import React from 'react';
+import withToasts from 'src/messageToasts/enhancers/withToasts';
 
-const metadata = new ChartMetadata({
-  name: t('Time-series Table'),
-  description: '',
-  thumbnail,
-  useLegacyApi: true,
-});
+type Message = Array<string>;
 
-export default class TimeTableChartPlugin extends ChartPlugin {
-  constructor() {
-    super({
-      metadata,
-      transformProps,
-      loadChart: () => import('./TimeTable.jsx'),
+interface CommonObject {
+  flash_messages: Array<Message>;
+}
+interface Props {
+  children: Node;
+  common: CommonObject;
+}
+
+const flashObj = {
+  info: 'addInfoToast',
+  danger: 'addDangerToast',
+  warning: 'addWarningToast',
+  success: 'addSuccessToast',
+};
+
+class FlashProvider extends React.PureComponent<Props> {
+  componentDidMount() {
+    const flashMessages = this.props.common.flash_messages;
+    flashMessages.forEach(message => {
+      const [type, text] = message;
+      const flash = flashObj[type];
+      this.props[flash](text);
     });
   }
+  render() {
+    return this.props.children;
+  }
 }
+
+export default withToasts(FlashProvider);

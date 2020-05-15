@@ -39,21 +39,21 @@ export default function NewMenu() {
       </button>
       <ul className="dropdown-menu">
         <li>
-          <a href="/superset/sqllab">
-            <span className="fa fa-fw fa-search" />
-            {t('SQL Query')}
+          <a href="/dashboard/new/">
+            <span className="fa fa-fw fa-dashboard" />
+            {t('  Dashboard')}
           </a>
         </li>
         <li>
           <a href="/chart/add">
             <span className="fa fa-fw fa-bar-chart" />
-            {t('Chart')}
+            {t(' Analysis')}
           </a>
         </li>
         <li>
-          <a href="/dashboard/new/">
-            <span className="fa fa-fw fa-dashboard" />
-            {t('Dashboard')}
+          <a href="/superset/sqllab">
+            <span className="fa fa-fw fa-search" />
+            {t('  SQL Query')}
           </a>
         </li>
       </ul>

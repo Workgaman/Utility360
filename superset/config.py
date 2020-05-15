@@ -290,9 +290,9 @@ DEFAULT_FEATURE_FLAGS = {
     "REDUCE_DASHBOARD_BOOTSTRAP_PAYLOAD": True,
     "SHARE_QUERIES_VIA_KV_STORE": False,
     "SIP_38_VIZ_REARCHITECTURE": False,
-    "TAGGING_SYSTEM": False,
+    "TAGGING_SYSTEM": True,
     "SQLLAB_BACKEND_PERSISTENCE": False,
-    "LIST_VIEWS_NEW_UI": False,
+    "LIST_VIEWS_NEW_UI": True,
 }
 
 # This is merely a default.
@@ -568,7 +568,7 @@ SQLLAB_CTAS_SCHEMA_NAME_FUNC: Optional[
     Callable[["Database", "models.User", str, str], str]
 ] = None
 
-# An instantiated derivative of werkzeug.contrib.cache.BaseCache
+# An instantiated derivative of cachelib.base.BaseCache
 # if enabled, it can be used to store the results of long-running queries
 # in SQL Lab by using the "Run Async" button/feature
 RESULTS_BACKEND = None
@@ -756,6 +756,11 @@ WEBDRIVER_CONFIGURATION: Dict[Any, Any] = {}
 
 # The base URL to query for accessing the user interface
 WEBDRIVER_BASEURL = "http://0.0.0.0:8080/"
+# The base URL for the email report hyperlinks.
+WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
+# Time in seconds, selenium will wait for the page to load
+# and render for the email report.
+EMAIL_PAGE_RENDER_WAIT = 30
 
 # Send user to a link where they can report bugs
 BUG_REPORT_URL = None
@@ -767,7 +772,7 @@ DOCUMENTATION_ICON = None  # Recommended size: 16x16
 
 # Enables the replacement react views for all the FAB views: list, edit, show.
 # This is a work in progress so not all features available in FAB have been implemented
-ENABLE_REACT_CRUD_VIEWS = False
+ENABLE_REACT_CRUD_VIEWS = True
 
 # What is the Last N days relative in the time selector to:
 # 'today' means it is midnight (00:00:00) in the local timezone
