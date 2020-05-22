@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Myraid Pro;
+    src: url("../fonts/MYRIADPRO-REGULAR.OTF") format("opentype")
+}
+@font-face {
+    font-family: Myraid Pro Bold;
+    src: url("../fonts/MYRIADPRO-BOLD.OTF") format("opentype")
+}
+@font-face {
+    font-family: Myraid Pro DemiBold;
+    src: url("../fonts/MYRIADPRO-SEMIBOLD.OTF") format("opentype")
+}
+@font-face {
+    font-family: Myraid Pro Light;
+    src: url("../fonts/MyriadPro-Light.otf") format("opentype")
+}

@@ -1,0 +1,60 @@
+<!-- extend base layout -->
+{% extends "appbuilder/loginlayout.html" %} {% block content %}
+<div class="login-section">
+  <div class="logo"></div>
+  <div class="login-text">Please Login to Continue</div>
+  <div id="loginbox" class="col-md-3">
+    <div style="padding-top: 30px;">
+      <form class="form" action="" method="post" name="login">
+        {{form.hidden_tag()}}
+        <div
+          class="control-group{% if form.errors.openid is defined %} error{% endif %}"
+        >
+          <div class="controls">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              {{ form.username(size = 80, class = "form-control", autofocus =
+              true, placeholder="Enter your username") }}
+            </div>
+            {% for error in form.errors.get('openid', []) %}
+            <span class="help-inline">[{{error}}]</span><br />
+            {% endfor %}
+              <br /> <br />
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              {{ form.password(size = 80, class = "form-control", placeholder="Enter your password") }}
+            </div>
+            {% for error in form.errors.get('openid', []) %}
+            <span class="help-inline">[{{error}}]</span><br />
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <br />
+            <div>
+              <input
+                class="btn btn-primary btn-lg"
+                type="submit"
+                value="{{_('Sign In')}}"
+              />
+              {% if appbuilder.sm.auth_user_registration %}
+              <a
+                href="{{appbuilder.sm.get_url_for_registeruser}}"
+                class="btn btn-block btn-primary"
+                data-toggle="tooltip"
+                rel="tooltip"
+                title="{{_('If you are not already a user, please register')}}"
+              >
+                {{_('Register')}}
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+body {
+    font-family: "Myraid Pro";
+}
+h1, h2, h3, h4, h5 {
+    font-family: "Myraid Pro DemiBold";
+}
+label {
+    font-family: "Myraid Pro DemiBold";
+}
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #FF0217;
+    border-color: #FF0217;
+    font-family: "Myraid Pro DemiBold";
+}
