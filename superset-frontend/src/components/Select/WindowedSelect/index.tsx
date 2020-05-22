@@ -16,36 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { t } from '@superset-ui/translation';
+import Select from 'react-select';
+import Async from 'react-select/async';
+import Creatable from 'react-select/creatable';
+import AsyncCreatable from 'react-select/async-creatable';
+import windowed from './windowed';
 
-export default {
-  controlPanelSections: [
-    {
-      label: t('Options'),
-      controlSetRows: [
-        [
-          {
-            name: 'url',
-            config: {
-              type: 'TextControl',
-              label: t('URL'),
-              description: t(
-                'The URL, this control is templated, so you can integrate ' +
-                  '{{ width }} and/or {{ height }} in your URL string.',
-              ),
-              default: '',
-            },
-          },
-        ],
-      ],
-    },
-  ],
-  sectionOverrides: {
-    druidTimeSeries: {
-      controlSetRows: [],
-    },
-    sqlaTimeSeries: {
-      controlSetRows: [],
-    },
-  },
-};
+export * from './windowed';
+
+export const WindowedSelect = windowed(Select);
+export const WindowedAsyncSelect = windowed(Async);
+export const WindowedCreatableSelect = windowed(Creatable);
+export const WindowedAsyncCreatableSelect = windowed(AsyncCreatable);
+export default WindowedSelect;
